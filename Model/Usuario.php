@@ -39,9 +39,9 @@ class Usuario {
     }
 
     public static function apagarToken($selector) {
-    global $pdo;
-    $stmt = $pdo->prepare("DELETE FROM auth_tokens WHERE selector = ?");
-    $stmt->execute([$selector]);
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM auth_tokens WHERE selector = ?");
+        $stmt->execute([$selector]);
     }
 
     public static function excluirConta($id) {
@@ -72,9 +72,55 @@ class Usuario {
     }
 
     public static function buscarPorId($pdo, $id) {
+        global $pdo;
         $stmt = $pdo->prepare("SELECT nickname, bio, foto_perfil FROM usuarios WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function emailExiste($pdo, $email) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
+        $stmt->execute([$email]);
+        return $stmt->fetch() ? true : false;
+    }
+
+    public static function nicknameExiste($pdo, $nickname) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE nickname = ?");
+        $stmt->execute([$nickname]);
+        return $stmt->fetch() ? true : false;
+    }
+
+    public static function cadastrarUsuario($pdo, $email, $nickname, $senha_hash, $bio, $foto_perfil) {
+        global $pdo;
+        try {
+            $stmt = $pdo->prepare("INSERT INTO usuarios (email, nickname, senha, bio, foto_perfil) VALUES (?, ?, ?, ?, ?)");
+            return $stmt->execute([$email, $nickname, $senha_hash, $bio, $foto_perfil]);
+        } catch (PDOException $e) {
+            // error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    public static function buscarUsuarioPorId($pdo, $id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT nickname, bio, foto_perfil FROM usuarios WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function nicknameExisteParaOutro($pdo, $nickname, $id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE nickname = ? AND id != ?");
+        $stmt->execute([$nickname, $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
+    public static function atualizarUsuario($pdo, $id, $nickname, $bio, $foto_perfil) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE usuarios SET nickname = ?, bio = ?, foto_perfil = ? WHERE id = ?");
+        return $stmt->execute([$nickname, $bio, $foto_perfil, $id]);
     }
 
 }

@@ -77,5 +77,32 @@
     <?php include '../View/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/imask"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleciona o campo de input do telefone pelo ID
+            const phoneInput = document.getElementById('telefone');
+            
+            // Define as opções da máscara.
+            // Ela aceita tanto telefones fixos (8 dígitos) quanto celulares (9 dígitos).
+            const mascaraTelefone = {
+                mask: [
+                    {
+                        mask: '(00) 0000-0000',
+                        maxLength: 14
+                    },
+                    {
+                        mask: '(00) 00000-0000',
+                        maxLength: 15
+                    }
+                ]
+            };
+
+            // Inicia a máscara no elemento selecionado
+            const mask = IMask(phoneInput, mascaraTelefone);
+        });
+    </script>
 </body>
 </html>

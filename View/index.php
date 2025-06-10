@@ -34,7 +34,7 @@
                         <div class="feature-item">
                             <i class="fas fa-share-alt fa-3x mb-3"></i>
                             <h3 class="h5">Compartilhe com Facilidade</h3>
-                            <p>Publique textos, fotos e atualizações de forma simples e intuitiva.</p>
+                            <p>Publique textos e atualizações de forma rápida, simples e intuitiva.</p>
                         </div>
                     </div>
                     <div class="col-md-4">

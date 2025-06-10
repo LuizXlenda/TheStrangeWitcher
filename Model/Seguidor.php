@@ -34,28 +34,33 @@ class Seguidor {
     }
 
     public static function jaSegue($pdo, $seguidorId, $seguidoId) {
+        global $pdo;
         $stmt = $pdo->prepare("SELECT 1 FROM seguidores WHERE id_seguidor = ? AND id_seguido = ?");
         $stmt->execute([$seguidorId, $seguidoId]);
         return $stmt->rowCount() > 0;
     }
 
     public static function seguir($pdo, $seguidorId, $seguidoId) {
+        global $pdo;
         $stmt = $pdo->prepare("INSERT INTO seguidores (id_seguidor, id_seguido) VALUES (?, ?)");
         $stmt->execute([$seguidorId, $seguidoId]);
     }
 
     public static function deixarDeSeguir($pdo, $seguidorId, $seguidoId) {
+        global $pdo;
         $stmt = $pdo->prepare("DELETE FROM seguidores WHERE id_seguidor = ? AND id_seguido = ?");
         $stmt->execute([$seguidorId, $seguidoId]);
     }
 
     public static function contarSeguidores($pdo, $id) {
+        global $pdo;
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM seguidores WHERE id_seguido = ?");
         $stmt->execute([$id]);
         return $stmt->fetchColumn();
     }
 
     public static function contarSeguindo($pdo, $id) {
+        global $pdo;
         $stmt = $pdo->prepare("SELECT COUNT(*) FROM seguidores WHERE id_seguidor = ?");
         $stmt->execute([$id]);
         return $stmt->fetchColumn();

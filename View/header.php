@@ -1,5 +1,5 @@
 
-<?php include '../Controller/HeaderController.php'; ?>
+<?php include '../Controller/LembrarSenhaController.php'; ?>
 
 
 <header>

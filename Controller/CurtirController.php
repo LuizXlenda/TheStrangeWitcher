@@ -1,7 +1,9 @@
 <?php
     session_start();
-    header('Content-Type: application/json'); // CORREÇÃO 1: Essencial para o JavaScript entender a resposta
+    header('Content-Type: application/json');
+
     require '../Model/Conexao.php';
+    require '../Model/Curtida.php';
 
     function responderErro($mensagem) {
         echo json_encode(['success' => false, 'message' => $mensagem]);
@@ -19,31 +21,20 @@
     $usuario_id = $_SESSION['usuario_id'];
     $id_publicacao = intval($_POST['id_publicacao']);
 
-    // CORREÇÃO 2: Envolver a lógica em um bloco try...catch para robustez
     try {
         $pdo->beginTransaction();
 
-        // Verificar se já curtiu o post
-        $stmt = $pdo->prepare("SELECT id FROM curtidas WHERE id_usuario = ? AND id_publicacao = ?");
-        $stmt->execute([$usuario_id, $id_publicacao]);
-        $existe = $stmt->fetch();
+        $existeCurtida = Curtida::jaCurtiu($pdo, $usuario_id, $id_publicacao);
 
-        if ($existe) {
-            // Se já curtiu, remove a curtida
-            $stmt = $pdo->prepare("DELETE FROM curtidas WHERE id = ?");
-            $stmt->execute([$existe['id']]);
+        if ($existeCurtida) {
+            Curtida::removerCurtida($pdo, $existeCurtida['id']);
             $curtiu = false;
         } else {
-            // Se não curtiou, adiciona
-            $stmt = $pdo->prepare("INSERT INTO curtidas (id_usuario, id_publicacao) VALUES (?, ?)");
-            $stmt->execute([$usuario_id, $id_publicacao]);
+            Curtida::adicionarCurtida($pdo, $usuario_id, $id_publicacao);
             $curtiu = true;
         }
 
-        // Contar total de curtidas no post agora
-        $stmt = $pdo->prepare("SELECT COUNT(*) AS total FROM curtidas WHERE id_publicacao = ?");
-        $stmt->execute([$id_publicacao]);
-        $total = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $total = Curtida::contarCurtidas($pdo, $id_publicacao);
 
         $pdo->commit();
 

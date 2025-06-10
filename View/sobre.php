@@ -21,14 +21,14 @@ session_start();
         
         <section class="text-center pt-5 pb-4">
             <h1 class="display-4 fw-bold">Nossa Missão</h1>
-            <p class="lead col-lg-8 mx-auto">Conectar entusiastas, criadores e fãs do universo de The Witcher em um espaço único, onde a paixão pela saga se transforma em amizade e novas aventuras.</p>
+            <p class="lead col-lg-8 mx-auto">Conectar entusiastas, criadores e fãs em um espaço único, onde a paixão pela saga se transforma em amizade e novas aventuras.</p>
         </section>
 
         <section class="py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h2 class="text-center mb-4">Nossa História</h2>
-                    <p>O "The Strange Witcher" nasceu da ideia de um desenvolvedor apaixonado por desenvolvimento web e pelo vasto mundo criado por Andrzej Sapkowski. Percebendo a necessidade de um lugar dedicado onde os fãs pudessem não apenas discutir, mas também compartilhar suas criações, teorias e momentos favoritos, este projeto foi forjado.</p>
+                    <p>O "The Strange Witcher" nasceu da ideia de dois desenvolvedores apaixonados por desenvolvimento web e pelo vasto mundo criado por Andrzej Sapkowski. Percebendo a necessidade de um lugar dedicado onde os fãs pudessem não apenas discutir, mas também compartilhar suas criações, teorias e momentos favoritos, este projeto foi forjado.</p>
                     <p>Desde a primeira linha de código, nosso objetivo tem sido criar uma plataforma intuitiva, bonita e, acima de tudo, acolhedora. Cada funcionalidade foi pensada para enriquecer a experiência da comunidade, transformando uma simples rede social em um verdadeiro ponto de encontro para todos os que trilham o Caminho.</p>
                 </div>
             </div>
@@ -62,7 +62,7 @@ session_start();
                         <div class="feature-item">
                             <i class="fas fa-lightbulb fa-3x mb-3"></i>
                             <h3 class="h5">Criatividade</h3>
-                            <p>Incentivamos a criação e o compartilhamento de conteúdo original, desde fanarts e cosplays até discussões aprofundadas.</p>
+                            <p>Incentivamos a criação e o compartilhamento de conteúdo original, mantendo o foco em discussões aprofundadas.</p>
                         </div>
                     </div>
                     <div class="col-md-4">

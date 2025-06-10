@@ -64,10 +64,7 @@
             exit();
         }
 
-        /**
-         * Busca comentários e suas respostas no banco.
-         * A query foi atualizada para buscar também a foto de perfil.
-         */
+        
         function buscarComentarios($pdo, $id_publicacao, $id_comentario_pai = null) {
             $sql = "
                 SELECT c.*, u.nickname, u.foto_perfil
@@ -82,10 +79,6 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        /**
-         * Função refatorada para exibir os comentários usando HTML moderno e classes Bootstrap.
-         * Removemos todos os estilos inline e a lógica de exibição complexa.
-         */
         function exibirComentarios($pdo, $comentarios) {
             foreach ($comentarios as $comentario) {
                 $id = $comentario['id'];
